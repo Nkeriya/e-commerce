@@ -1,0 +1,17 @@
+name: Code Style Checker
+
+on: [pull_request]
+
+jobs:
+  lint:
+    name: all linters
+    run-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      -uses: actions/checkout@v3
+      -uses: ruby/setup-ruby@v1
+        with:
+          bundle-cache: true
+      -name: Rubocop
+        run: bundle exec rubocop --parallel
